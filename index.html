@@ -655,7 +655,6 @@
             <div class="eyebrow">GDS · Amadeus</div>
             <h1>Fare Calc Builder</h1>
             <div class="sub">Armá la línea de fare calculation segmento por segmento — sin pelearte con la sintaxis.
-                <small>by: bmsebastian2@gmail.com</small>
             </div>
         </div>
         <button class="clear-btn" id="clearBtn">↺ Limpiar todo</button>
@@ -667,7 +666,7 @@
 
             <div class="origin-row">
                 <label>Origen</label>
-                <input type="text" id="origin" class="origin-city" maxlength="3" value="MVD">
+                <input type="text" id="origin" class="origin-city" maxlength="3" value="MVD" list="cityOptions">
                 <span style="font-size:11px;color:var(--muted);">código de ciudad (3 letras)</span>
             </div>
 
@@ -734,6 +733,66 @@
 
 <div class="toast" id="toast">Copiado al portapapeles</div>
 
+<datalist id="airlineOptions">
+    <option value="AR" label="Aerolíneas Argentinas">
+    <option value="LA" label="LATAM Airlines">
+    <option value="JJ" label="LATAM Brasil">
+    <option value="G3" label="Gol">
+    <option value="AD" label="Azul">
+    <option value="CM" label="Copa Airlines">
+    <option value="AV" label="Avianca">
+    <option value="H2" label="Sky Airline">
+    <option value="FO" label="Flybondi">
+    <option value="AZ" label="ITA Airways">
+    <option value="UX" label="Air Europa">
+    <option value="IB" label="Iberia">
+    <option value="AA" label="American Airlines">
+    <option value="DL" label="Delta">
+    <option value="UA" label="United">
+    <option value="B6" label="JetBlue">
+    <option value="AF" label="Air France">
+    <option value="KL" label="KLM">
+    <option value="BA" label="British Airways">
+    <option value="TP" label="TAP Portugal">
+    <option value="LH" label="Lufthansa">
+    <option value="AM" label="Aeroméxico">
+    <option value="CU" label="Cubana">
+    <option value="TK" label="Turkish Airlines">
+    <option value="EK" label="Emirates">
+    <option value="QR" label="Qatar Airways">
+</datalist>
+
+<datalist id="cityOptions">
+    <option value="MVD" label="Montevideo">
+    <option value="BUE" label="Buenos Aires (ciudad)">
+    <option value="USH" label="Ushuaia">
+    <option value="FTE" label="Punta del Este">
+    <option value="COR" label="Córdoba (AR)">
+    <option value="MDZ" label="Mendoza">
+    <option value="BRC" label="Bariloche">
+    <option value="IGR" label="Puerto Iguazú">
+    <option value="SAO" label="São Paulo (ciudad)">
+    <option value="RIO" label="Río de Janeiro (ciudad)">
+    <option value="POA" label="Porto Alegre">
+    <option value="FLN" label="Florianópolis">
+    <option value="ASU" label="Asunción">
+    <option value="SCL" label="Santiago de Chile">
+    <option value="LIM" label="Lima">
+    <option value="BOG" label="Bogotá">
+    <option value="PTY" label="Ciudad de Panamá">
+    <option value="UIO" label="Quito">
+    <option value="CCS" label="Caracas">
+    <option value="MIA" label="Miami">
+    <option value="NYC" label="Nueva York (ciudad)">
+    <option value="MEX" label="Ciudad de México">
+    <option value="MAD" label="Madrid">
+    <option value="BCN" label="Barcelona">
+    <option value="LON" label="Londres (ciudad)">
+    <option value="PAR" label="París (ciudad)">
+    <option value="ROM" label="Roma (ciudad)">
+    <option value="LIS" label="Lisboa">
+</datalist>
+
 <script>
     function blankStrips() {
         return [
@@ -762,11 +821,11 @@
       </div>
       <div class="f-air">
         <span class="field-label">Aerolínea</span>
-        <input type="text" class="airline" maxlength="2" value="${s.airline}" data-idx="${i}" data-field="airline">
+        <input type="text" class="airline" maxlength="2" value="${s.airline}" data-idx="${i}" data-field="airline" list="airlineOptions">
       </div>
       <div class="f-city">
         <span class="field-label">Ciudad</span>
-        <input type="text" class="city" maxlength="3" value="${s.city}" data-idx="${i}" data-field="city">
+        <input type="text" class="city" maxlength="3" value="${s.city}" data-idx="${i}" data-field="city" list="cityOptions">
       </div>
       <div class="f-amt">
         <span class="field-label">Monto parcial</span>
