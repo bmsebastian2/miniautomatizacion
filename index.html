@@ -1,833 +1,841 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Fare Calc Builder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
-<style>
-    :root {
-        --bg: #0B0E12;
-        --panel: #141A22;
-        --strip: #1A222C;
-        --strip-border: #262F3B;
-        --amber: #E8A33D;
-        --teal: #4FD1C5;
-        --red: #E5484D;
-        --text: #EDEFF2;
-        --muted: #7C8794;
-        --mono: 'IBM Plex Mono', 'Courier New', monospace;
-        --sans: 'IBM Plex Sans', -apple-system, sans-serif;
-    }
-
-    * {
-        box-sizing: border-box;
-    }
-
-    body {
-        margin: 0;
-        background: var(--bg);
-        color: var(--text);
-        font-family: var(--sans);
-        padding: 16px 14px 48px;
-        min-height: 100vh;
-    }
-
-    .wrap {
-        max-width: 1100px;
-        margin: 0 auto;
-    }
-
-    header {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-        border-bottom: 1px solid var(--strip-border);
-        padding-bottom: 16px;
-        margin-bottom: 20px;
-    }
-
-    @media (min-width:640px) {
-        header {
-            flex-direction: row;
-            align-items: baseline;
-            justify-content: space-between;
-            flex-wrap: wrap;
+    <style>
+        :root {
+            --bg: #0B0E12;
+            --panel: #141A22;
+            --strip: #1A222C;
+            --strip-border: #262F3B;
+            --amber: #E8A33D;
+            --teal: #4FD1C5;
+            --red: #E5484D;
+            --text: #EDEFF2;
+            --muted: #7C8794;
+            --mono: 'IBM Plex Mono', 'Courier New', monospace;
+            --sans: 'IBM Plex Sans', -apple-system, sans-serif;
         }
-    }
 
-    .eyebrow {
-        font-family: var(--mono);
-        font-size: 11px;
-        letter-spacing: .18em;
-        color: var(--amber);
-        text-transform: uppercase;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    h1 {
-        font-size: 22px;
-        margin: 4px 0 0;
-        font-weight: 600;
-        letter-spacing: -0.01em;
-    }
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            padding: 16px 14px 48px;
+            min-height: 100vh;
+        }
 
-    .sub {
-        font-size: 13px;
-        color: var(--muted);
-        max-width: 420px;
-    }
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
 
-    .layout {
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-    }
-
-    .layout>.panel {
-        flex: 1 1 auto;
-    }
-
-    @media (min-width: 860px) {
-        .layout {
-            flex-direction: row;
+        header {
+            display: flex;
+            flex-direction: column;
             align-items: flex-start;
-            gap: 24px;
+            gap: 12px;
+            border-bottom: 1px solid var(--strip-border);
+            padding-bottom: 16px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width:640px) {
+            header {
+                flex-direction: row;
+                align-items: baseline;
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+        }
+
+        .eyebrow {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: .18em;
+            color: var(--amber);
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 22px;
+            margin: 4px 0 0;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .sub {
+            font-size: 13px;
+            color: var(--muted);
+            max-width: 420px;
+        }
+
+        .layout {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
         }
 
         .layout>.panel {
-            flex: 1.15 1 0;
+            flex: 1 1 auto;
         }
 
-        .layout>.sticky {
-            flex: 1 1 0;
+        @media (min-width: 860px) {
+            .layout {
+                flex-direction: row;
+                align-items: flex-start;
+                gap: 24px;
+            }
+
+            .layout>.panel {
+                flex: 1.15 1 0;
+            }
+
+            .layout>.sticky {
+                flex: 1 1 0;
+            }
         }
-    }
 
-    .panel {
-        background: var(--panel);
-        border: 1px solid var(--strip-border);
-        border-radius: 10px;
-        padding: 14px;
-    }
-
-    @media (min-width:640px) {
         .panel {
-            padding: 18px;
+            background: var(--panel);
+            border: 1px solid var(--strip-border);
+            border-radius: 10px;
+            padding: 14px;
         }
-    }
 
-    .panel h2 {
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: .1em;
-        color: var(--muted);
-        margin: 0 0 14px;
-        font-weight: 600;
-    }
+        @media (min-width:640px) {
+            .panel {
+                padding: 18px;
+            }
+        }
 
-    .origin-row {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 16px;
-    }
+        .panel h2 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--muted);
+            margin: 0 0 14px;
+            font-weight: 600;
+        }
 
-    .origin-row label {
-        font-size: 12px;
-        color: var(--muted);
-        font-family: var(--mono);
-        white-space: nowrap;
-    }
+        .origin-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
 
-    input[type="text"],
-    input[type="number"] {
-        background: #0E141C;
-        border: 1px solid var(--strip-border);
-        color: var(--text);
-        font-family: var(--mono);
-        font-size: 16px;
-        padding: 10px;
-        border-radius: 6px;
-        width: 100%;
-        outline: none;
-        transition: border-color .15s;
-    }
-
-    @media (min-width:640px) {
+        .origin-row label {
+            font-size: 12px;
+            color: var(--muted);
+            font-family: var(--mono);
+            white-space: nowrap;
+        }
 
         input[type="text"],
         input[type="number"] {
-            font-size: 13px;
-            padding: 8px 10px;
+            background: #0E141C;
+            border: 1px solid var(--strip-border);
+            color: var(--text);
+            font-family: var(--mono);
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 6px;
+            width: 100%;
+            outline: none;
+            transition: border-color .15s;
         }
-    }
 
-    input:focus {
-        border-color: var(--amber);
-    }
+        @media (min-width:640px) {
 
-    input.origin-city {
-        width: 80px;
-        text-transform: uppercase;
-        text-align: center;
-        font-weight: 600;
-    }
+            input[type="text"],
+            input[type="number"] {
+                font-size: 13px;
+                padding: 8px 10px;
+            }
+        }
 
-    .strips {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
+        input:focus {
+            border-color: var(--amber);
+        }
 
-    .strip {
-        position: relative;
-        background: var(--strip);
-        border: 1px solid var(--strip-border);
-        border-left: 3px solid var(--muted);
-        border-radius: 8px;
-        padding: 12px 14px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        align-items: flex-end;
-        transition: border-color .15s;
-    }
+        input.origin-city {
+            width: 80px;
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: 600;
+        }
 
-    .strip.is-connection {
-        border-left-color: var(--amber);
-    }
+        .strips {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-    .strip.is-stopover {
-        border-left-color: var(--teal);
-    }
+        .strip {
+            position: relative;
+            background: var(--strip);
+            border: 1px solid var(--strip-border);
+            border-left: 3px solid var(--muted);
+            border-radius: 8px;
+            padding: 12px 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: flex-end;
+            transition: border-color .15s;
+        }
 
-    .strip-top {
-        flex: 1 0 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        order: -1;
-    }
+        .strip.is-connection {
+            border-left-color: var(--amber);
+        }
 
-    @media (min-width:700px) {
+        .strip.is-stopover {
+            border-left-color: var(--teal);
+        }
+
         .strip-top {
-            flex: 0 0 auto;
-            order: 0;
-            width: auto;
+            flex: 1 0 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            order: -1;
         }
-    }
 
-    .strip .num {
-        font-family: var(--mono);
-        font-size: 11px;
-        color: var(--muted);
-    }
-
-    .strip .f-air {
-        flex: 1 1 64px;
-        min-width: 56px;
-    }
-
-    .strip .f-city {
-        flex: 1 1 64px;
-        min-width: 56px;
-    }
-
-    .strip .f-amt {
-        flex: 1 1 100px;
-        min-width: 90px;
-    }
-
-    .strip input.city {
-        text-transform: uppercase;
-        text-align: center;
-        font-weight: 600;
-    }
-
-    .strip input.airline {
-        text-transform: uppercase;
-        text-align: center;
-    }
-
-    .strip .field-label {
-        font-size: 9px;
-        text-transform: uppercase;
-        letter-spacing: .06em;
-        color: var(--muted);
-        margin-bottom: 3px;
-        display: block;
-    }
-
-    .conn-toggle {
-        flex: 1 1 180px;
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-    }
-
-    .conn-toggle .buttons-row {
-        display: flex;
-        gap: 6px;
-    }
-
-    .conn-toggle .buttons-row button {
-        flex: 1;
-        min-height: 38px;
-    }
-
-    .conn-toggle button {
-        font-family: var(--mono);
-        font-size: 11px;
-        letter-spacing: .05em;
-        padding: 8px 6px;
-        border-radius: 5px;
-        border: 1px solid var(--strip-border);
-        background: #0E141C;
-        color: var(--muted);
-        cursor: pointer;
-        white-space: nowrap;
-        transition: all .15s;
-    }
-
-    .conn-toggle button.active-x {
-        background: rgba(232, 163, 61, .15);
-        border-color: var(--amber);
-        color: var(--amber);
-    }
-
-    .conn-toggle button.active-o {
-        background: rgba(79, 209, 197, .15);
-        border-color: var(--teal);
-        color: var(--teal);
-    }
-
-    .remove-btn {
-        background: none;
-        border: none;
-        color: var(--muted);
-        cursor: pointer;
-        font-size: 18px;
-        padding: 6px 10px;
-        border-radius: 5px;
-        line-height: 1;
-        min-height: 38px;
-    }
-
-    .remove-btn:hover {
-        color: var(--red);
-        background: rgba(229, 72, 77, .1);
-    }
-
-    .add-strip {
-        margin-top: 12px;
-        width: 100%;
-        background: transparent;
-        border: 1px dashed var(--strip-border);
-        color: var(--muted);
-        font-family: var(--mono);
-        font-size: 13px;
-        padding: 12px;
-        border-radius: 6px;
-        cursor: pointer;
-        min-height: 44px;
-        transition: all .15s;
-    }
-
-    .add-strip:hover {
-        border-color: var(--amber);
-        color: var(--amber);
-    }
-
-    .totals-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 14px;
-        margin-top: 16px;
-        padding-top: 16px;
-        border-top: 1px solid var(--strip-border);
-    }
-
-    .totals-row .field {
-        flex: 1 1 120px;
-    }
-
-    .totals-row label {
-        display: block;
-        font-size: 10px;
-        text-transform: uppercase;
-        letter-spacing: .06em;
-        color: var(--muted);
-        margin-bottom: 5px;
-        font-family: var(--mono);
-    }
-
-    @media (min-width:860px) {
-        .sticky {
-            position: sticky;
-            top: 20px;
+        @media (min-width:700px) {
+            .strip-top {
+                flex: 0 0 auto;
+                order: 0;
+                width: auto;
+            }
         }
-    }
 
-    .terminal {
-        background: #080B0F;
-        border: 1px solid var(--strip-border);
-        border-radius: 8px;
-        padding: 16px;
-        font-family: var(--mono);
-        font-size: 13px;
-        line-height: 1.7;
-        min-height: 70px;
-        word-break: break-all;
-        white-space: pre-wrap;
-    }
+        .strip .num {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--muted);
+        }
 
-    .terminal .city-tok {
-        color: var(--teal);
-        font-weight: 600;
-    }
+        .strip .f-air {
+            flex: 1 1 64px;
+            min-width: 56px;
+        }
 
-    .terminal .conn-tok {
-        color: var(--amber);
-        font-weight: 600;
-    }
+        .strip .f-city {
+            flex: 1 1 64px;
+            min-width: 56px;
+        }
 
-    .terminal .air-tok {
-        color: #B7BEC9;
-    }
+        .strip .f-amt {
+            flex: 1 1 100px;
+            min-width: 90px;
+        }
 
-    .terminal .amt-tok {
-        color: var(--text);
-        font-weight: 600;
-    }
+        .strip input.city {
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: 600;
+        }
 
-    .terminal .kw-tok {
-        color: var(--amber);
-    }
+        .strip input.airline {
+            text-transform: uppercase;
+            text-align: center;
+        }
 
-    .status {
-        margin-top: 12px;
-        font-family: var(--mono);
-        font-size: 12px;
-        padding: 9px 11px;
-        border-radius: 6px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px;
-    }
+        .strip .field-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: var(--muted);
+            margin-bottom: 3px;
+            display: block;
+        }
 
-    .status.ok {
-        background: rgba(79, 209, 197, .1);
-        color: var(--teal);
-        border: 1px solid rgba(79, 209, 197, .3);
-    }
+        .conn-toggle {
+            flex: 1 1 180px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
 
-    .status.warn {
-        background: rgba(229, 72, 77, .1);
-        color: var(--red);
-        border: 1px solid rgba(229, 72, 77, .3);
-    }
+        .conn-toggle .buttons-row {
+            display: flex;
+            gap: 6px;
+        }
 
-    .btn-row {
-        display: flex;
-        gap: 8px;
-        margin-top: 12px;
-    }
+        .conn-toggle .buttons-row button {
+            flex: 1;
+            min-height: 38px;
+        }
 
-    .copy-btn {
-        flex: 1;
-        background: var(--amber);
-        color: #1A1204;
-        border: none;
-        font-family: var(--sans);
-        font-weight: 600;
-        font-size: 14px;
-        padding: 13px;
-        border-radius: 6px;
-        cursor: pointer;
-        min-height: 46px;
-        transition: filter .15s;
-    }
+        .conn-toggle button {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: .05em;
+            padding: 8px 6px;
+            border-radius: 5px;
+            border: 1px solid var(--strip-border);
+            background: #0E141C;
+            color: var(--muted);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all .15s;
+        }
 
-    .copy-btn:hover {
-        filter: brightness(1.08);
-    }
+        .conn-toggle button.active-x {
+            background: rgba(232, 163, 61, .15);
+            border-color: var(--amber);
+            color: var(--amber);
+        }
 
-    .copy-btn:active {
-        filter: brightness(0.95);
-    }
+        .conn-toggle button.active-o {
+            background: rgba(79, 209, 197, .15);
+            border-color: var(--teal);
+            color: var(--teal);
+        }
 
-    .format-toggle {
-        display: flex;
-        background: #0E141C;
-        border: 1px solid var(--strip-border);
-        border-radius: 6px;
-        padding: 3px;
-        margin-bottom: 12px;
-    }
+        .remove-btn {
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 18px;
+            padding: 6px 10px;
+            border-radius: 5px;
+            line-height: 1;
+            min-height: 38px;
+        }
 
-    .format-toggle button {
-        flex: 1;
-        background: none;
-        border: none;
-        color: var(--muted);
-        font-family: var(--mono);
-        font-size: 11px;
-        padding: 9px 6px;
-        border-radius: 4px;
-        cursor: pointer;
-        min-height: 38px;
-    }
+        .remove-btn:hover {
+            color: var(--red);
+            background: rgba(229, 72, 77, .1);
+        }
 
-    .format-toggle button.active {
-        background: var(--strip);
-        color: var(--text);
-    }
+        .add-strip {
+            margin-top: 12px;
+            width: 100%;
+            background: transparent;
+            border: 1px dashed var(--strip-border);
+            color: var(--muted);
+            font-family: var(--mono);
+            font-size: 13px;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            min-height: 44px;
+            transition: all .15s;
+        }
 
-    .legend {
-        display: flex;
-        gap: 14px;
-        flex-wrap: wrap;
-        margin-top: 14px;
-        font-size: 11px;
-        color: var(--muted);
-        font-family: var(--mono);
-    }
+        .add-strip:hover {
+            border-color: var(--amber);
+            color: var(--amber);
+        }
 
-    .legend span {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
+        .totals-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--strip-border);
+        }
 
-    .dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 2px;
-        display: inline-block;
-    }
+        .totals-row .field {
+            flex: 1 1 120px;
+        }
 
-    .paste-panel {
-        background: #0E141C;
-        border: 1px solid var(--strip-border);
-        border-radius: 8px;
-        margin-bottom: 16px;
-        overflow: hidden;
-    }
+        .totals-row label {
+            display: block;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: var(--muted);
+            margin-bottom: 5px;
+            font-family: var(--mono);
+        }
 
-    .paste-head {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 11px 14px;
-        font-size: 12px;
-        color: var(--text);
-    }
+        @media (min-width:860px) {
+            .sticky {
+                position: sticky;
+                top: 20px;
+            }
+        }
 
-    .toggle-paste {
-        background: none;
-        border: 1px solid var(--strip-border);
-        color: var(--amber);
-        font-family: var(--mono);
-        font-size: 11px;
-        padding: 8px 12px;
-        border-radius: 5px;
-        cursor: pointer;
-        min-height: 36px;
-    }
+        .terminal {
+            background: #080B0F;
+            border: 1px solid var(--strip-border);
+            border-radius: 8px;
+            padding: 16px;
+            font-family: var(--mono);
+            font-size: 13px;
+            line-height: 1.7;
+            min-height: 70px;
+            word-break: break-all;
+            white-space: pre-wrap;
+        }
 
-    .paste-body {
-        padding: 0 14px 14px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
+        .terminal .city-tok {
+            color: var(--teal);
+            font-weight: 600;
+        }
 
-    #tqtInput {
-        width: 100%;
-        min-height: 110px;
-        background: #080B0F;
-        border: 1px solid var(--strip-border);
-        border-radius: 6px;
-        color: var(--text);
-        font-family: var(--mono);
-        font-size: 12px;
-        padding: 10px;
-        resize: vertical;
-        outline: none;
-    }
+        .terminal .conn-tok {
+            color: var(--amber);
+            font-weight: 600;
+        }
 
-    #tqtInput:focus {
-        border-color: var(--amber);
-    }
+        .terminal .air-tok {
+            color: #B7BEC9;
+        }
 
-    .airport-check {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 12px;
-        color: var(--muted);
-        cursor: pointer;
-    }
+        .terminal .amt-tok {
+            color: var(--text);
+            font-weight: 600;
+        }
 
-    .parse-btn {
-        background: var(--teal);
-        color: #062622;
-        border: none;
-        font-family: var(--sans);
-        font-weight: 600;
-        font-size: 13px;
-        padding: 10px;
-        border-radius: 6px;
-        cursor: pointer;
-    }
+        .terminal .kw-tok {
+            color: var(--amber);
+        }
 
-    .parse-btn:hover {
-        filter: brightness(1.08);
-    }
+        .status {
+            margin-top: 12px;
+            font-family: var(--mono);
+            font-size: 12px;
+            padding: 9px 11px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
 
-    .parse-msg {
-        font-family: var(--mono);
-        font-size: 11px;
-        color: var(--muted);
-    }
+        .status.ok {
+            background: rgba(79, 209, 197, .1);
+            color: var(--teal);
+            border: 1px solid rgba(79, 209, 197, .3);
+        }
 
-    .parse-msg.ok {
-        color: var(--teal);
-    }
+        .status.warn {
+            background: rgba(229, 72, 77, .1);
+            color: var(--red);
+            border: 1px solid rgba(229, 72, 77, .3);
+        }
 
-    .parse-msg.err {
-        color: var(--red);
-    }
+        .btn-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
 
-    .clear-btn {
-        background: transparent;
-        border: 1px solid var(--strip-border);
-        color: var(--muted);
-        font-family: var(--mono);
-        font-size: 12px;
-        padding: 10px 14px;
-        border-radius: 6px;
-        cursor: pointer;
-        white-space: nowrap;
-        width: 100%;
-        min-height: 40px;
-        transition: all .15s;
-    }
+        .copy-btn {
+            flex: 1;
+            background: var(--amber);
+            color: #1A1204;
+            border: none;
+            font-family: var(--sans);
+            font-weight: 600;
+            font-size: 14px;
+            padding: 13px;
+            border-radius: 6px;
+            cursor: pointer;
+            min-height: 46px;
+            transition: filter .15s;
+        }
 
-    .clear-btn:hover {
-        border-color: var(--red);
-        color: var(--red);
-    }
+        .copy-btn:hover {
+            filter: brightness(1.08);
+        }
 
-    @media (min-width:640px) {
+        .copy-btn:active {
+            filter: brightness(0.95);
+        }
+
+        .format-toggle {
+            display: flex;
+            background: #0E141C;
+            border: 1px solid var(--strip-border);
+            border-radius: 6px;
+            padding: 3px;
+            margin-bottom: 12px;
+        }
+
+        .format-toggle button {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-family: var(--mono);
+            font-size: 11px;
+            padding: 9px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            min-height: 38px;
+        }
+
+        .format-toggle button.active {
+            background: var(--strip);
+            color: var(--text);
+        }
+
+        .legend {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+            font-size: 11px;
+            color: var(--muted);
+            font-family: var(--mono);
+        }
+
+        .legend span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+
+        .paste-panel {
+            background: #0E141C;
+            border: 1px solid var(--strip-border);
+            border-radius: 8px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .paste-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 11px 14px;
+            font-size: 12px;
+            color: var(--text);
+        }
+
+        .toggle-paste {
+            background: none;
+            border: 1px solid var(--strip-border);
+            color: var(--amber);
+            font-family: var(--mono);
+            font-size: 11px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            min-height: 36px;
+        }
+
+        .paste-body {
+            padding: 0 14px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #tqtInput {
+            width: 100%;
+            min-height: 110px;
+            background: #080B0F;
+            border: 1px solid var(--strip-border);
+            border-radius: 6px;
+            color: var(--text);
+            font-family: var(--mono);
+            font-size: 12px;
+            padding: 10px;
+            resize: vertical;
+            outline: none;
+        }
+
+        #tqtInput:focus {
+            border-color: var(--amber);
+        }
+
+        .airport-check {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--muted);
+            cursor: pointer;
+        }
+
+        .parse-btn {
+            background: var(--teal);
+            color: #062622;
+            border: none;
+            font-family: var(--sans);
+            font-weight: 600;
+            font-size: 13px;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .parse-btn:hover {
+            filter: brightness(1.08);
+        }
+
+        .parse-msg {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .parse-msg.ok {
+            color: var(--teal);
+        }
+
+        .parse-msg.err {
+            color: var(--red);
+        }
+
         .clear-btn {
-            width: auto;
+            background: transparent;
+            border: 1px solid var(--strip-border);
+            color: var(--muted);
+            font-family: var(--mono);
+            font-size: 12px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            white-space: nowrap;
+            width: 100%;
+            min-height: 40px;
+            transition: all .15s;
         }
-    }
 
-    .footer-credit {
-        text-align: center;
-        margin-top: 28px;
-        padding-top: 16px;
-        border-top: 1px solid var(--strip-border);
-        font-family: var(--mono);
-        font-size: 11px;
-        letter-spacing: .04em;
-        color: var(--muted);
-    }
+        .clear-btn:hover {
+            border-color: var(--red);
+            color: var(--red);
+        }
 
-    .toast {
-        position: fixed;
-        bottom: 24px;
-        left: 50%;
-        transform: translateX(-50%) translateY(20px);
-        background: var(--teal);
-        color: #062622;
-        font-family: var(--mono);
-        font-size: 12px;
-        font-weight: 600;
-        padding: 10px 18px;
-        border-radius: 20px;
-        opacity: 0;
-        transition: all .25s;
-        pointer-events: none;
-    }
+        @media (min-width:640px) {
+            .clear-btn {
+                width: auto;
+            }
+        }
 
-    .toast.show {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-</style>
+        .footer-credit {
+            text-align: center;
+            margin-top: 28px;
+            padding-top: 16px;
+            border-top: 1px solid var(--strip-border);
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: .04em;
+            color: var(--muted);
+        }
 
-<div class="wrap">
-    <header>
-        <div>
-            <div class="eyebrow">GDS · Amadeus</div>
-            <h1>Fare Calc Builder</h1>
-            <div class="sub">Armá la línea de fare calculation segmento por segmento — sin pelearte con la sintaxis.
-            </div>
-        </div>
-        <button class="clear-btn" id="clearBtn">↺ Limpiar todo</button>
-    </header>
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--teal);
+            color: #062622;
+            font-family: var(--mono);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 10px 18px;
+            border-radius: 20px;
+            opacity: 0;
+            transition: all .25s;
+            pointer-events: none;
+        }
 
-    <div class="layout">
-        <div class="panel">
-            <h2>Itinerario</h2>
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
 
-            <div class="origin-row">
-                <label>Origen</label>
-                <input type="text" id="origin" class="origin-city" maxlength="3" value="MVD" list="cityOptions">
-                <span style="font-size:11px;color:var(--muted);">código de ciudad (3 letras)</span>
-            </div>
-
-            <div class="paste-panel" id="pastePanel">
-                <div class="paste-head">
-                    <span>📋 Pegar itinerario (TQT) y auto-completar</span>
-                    <button class="toggle-paste" id="togglePaste">mostrar</button>
-                </div>
-                <div class="paste-body" id="pasteBody" style="display:none;">
-                    <textarea id="tqtInput"
-                        placeholder="Pegá acá las líneas del TQT, por ejemplo:&#10;1    MVD AR 1383 R 08SEP 0945&#10;2 X AEP AR 1890 U 08SEP 1555&#10;3 O USH AR 1895 M 12SEP 1120&#10;4 O FTE AR 1895 M 16SEP 1330&#10;5 X AEP AR 1388 M 16SEP 1745&#10;   MVD"></textarea>
-                    <label class="airport-check">
-                        <input type="checkbox" id="normalizeAirports" checked>
-                        Convertir aeropuertos a código de ciudad (AEP/EZE → BUE, JFK/EWR → NYC, etc.)
-                    </label>
-                    <button class="parse-btn" id="parseTqtBtn">Auto-completar tramos</button>
-                    <div class="parse-msg" id="parseMsg"></div>
+    <div class="wrap">
+        <header>
+            <div>
+                <div class="eyebrow">GDS · Amadeus</div>
+                <h1>Fare Calc Builder</h1>
+                <div class="sub">Armá la línea de fare calculation segmento por segmento — sin pelearte con la sintaxis.
                 </div>
             </div>
+            <button class="clear-btn" id="clearBtn">↺ Limpiar todo</button>
+        </header>
 
-            <div class="strips" id="strips"></div>
-
-            <button class="add-strip" id="addStrip">+ agregar tramo</button>
-
-            <div class="totals-row">
-                <div class="field">
-                    <label>ROE</label>
-                    <input type="text" id="roe" value="1.00">
-                </div>
-                <div class="field">
-                    <label>NUC total (auto)</label>
-                    <input type="text" id="nucTotal" readonly style="color:var(--amber); font-weight:600;">
-                </div>
-            </div>
-
-            <div class="legend">
-                <span><span class="dot" style="background:var(--amber)"></span> Conexión (X/)</span>
-                <span><span class="dot" style="background:var(--teal)"></span> Stopover</span>
-            </div>
-        </div>
-
-        <div class="sticky">
+        <div class="layout">
             <div class="panel">
-                <h2>Resultado</h2>
+                <h2>Itinerario</h2>
 
-                <div class="format-toggle">
-                    <button class="active" data-fmt="tti">Página de comando (TTI/C)</button>
-                    <button data-fmt="fc">Solo fare calc</button>
+                <div class="origin-row">
+                    <label>Origen</label>
+                    <input type="text" id="origin" class="origin-city" maxlength="3" value="MVD" list="cityOptions">
+                    <span style="font-size:11px;color:var(--muted);">código de ciudad (3 letras)</span>
                 </div>
 
-                <div class="terminal" id="output">—</div>
-
-                <div class="status ok" id="status">
-                    <span id="statusText">Completá al menos un tramo</span>
+                <div class="paste-panel" id="pastePanel">
+                    <div class="paste-head">
+                        <span>📋 Pegar itinerario (TQT) y auto-completar</span>
+                        <button class="toggle-paste" id="togglePaste">mostrar</button>
+                    </div>
+                    <div class="paste-body" id="pasteBody" style="display:none;">
+                        <textarea id="tqtInput"
+                            placeholder="Pegá acá las líneas del TQT, por ejemplo:&#10;1    MVD AR 1383 R 08SEP 0945&#10;2 X AEP AR 1890 U 08SEP 1555&#10;3 O USH AR 1895 M 12SEP 1120&#10;4 O FTE AR 1895 M 16SEP 1330&#10;5 X AEP AR 1388 M 16SEP 1745&#10;   MVD"></textarea>
+                        <label class="airport-check">
+                            <input type="checkbox" id="normalizeAirports" checked>
+                            Convertir aeropuertos a código de ciudad (AEP/EZE → BUE, JFK/EWR → NYC, etc.)
+                        </label>
+                        <button class="parse-btn" id="parseTqtBtn">Auto-completar tramos</button>
+                        <div class="parse-msg" id="parseMsg"></div>
+                    </div>
                 </div>
 
-                <div class="btn-row">
-                    <button class="copy-btn" id="copyBtn">Copiar línea</button>
+                <div class="strips" id="strips"></div>
+
+                <button class="add-strip" id="addStrip">+ agregar tramo</button>
+
+                <div class="totals-row">
+                    <div class="field">
+                        <label>ROE</label>
+                        <input type="text" id="roe" value="1.00">
+                    </div>
+                    <div class="field">
+                        <label>NUC total (auto)</label>
+                        <input type="text" id="nucTotal" readonly style="color:var(--amber); font-weight:600;">
+                    </div>
+                </div>
+
+                <div class="legend">
+                    <span><span class="dot" style="background:var(--amber)"></span> Conexión (X/)</span>
+                    <span><span class="dot" style="background:var(--teal)"></span> Stopover</span>
+                </div>
+            </div>
+
+            <div class="sticky">
+                <div class="panel">
+                    <h2>Resultado</h2>
+
+                    <div class="format-toggle">
+                        <button class="active" data-fmt="tti">Página de comando (TTI/C)</button>
+                        <button data-fmt="fc">Solo fare calc</button>
+                    </div>
+
+                    <div class="terminal" id="output">—</div>
+
+                    <div class="status ok" id="status">
+                        <span id="statusText">Completá al menos un tramo</span>
+                    </div>
+
+                    <div class="btn-row">
+                        <button class="copy-btn" id="copyBtn">Copiar línea</button>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="footer-credit">Creado por bmsebastian2@gmail.com</div>
     </div>
 
-    <div class="footer-credit">Creado por bmsebastian2@gmail.com</div>
-</div>
+    <div class="toast" id="toast">Copiado al portapapeles</div>
 
-<div class="toast" id="toast">Copiado al portapapeles</div>
+    <datalist id="airlineOptions">
+        <option value="AR" label="Aerolíneas Argentinas">
+        <option value="LA" label="LATAM Airlines">
+        <option value="JJ" label="LATAM Brasil">
+        <option value="G3" label="Gol">
+        <option value="AD" label="Azul">
+        <option value="CM" label="Copa Airlines">
+        <option value="AV" label="Avianca">
+        <option value="H2" label="Sky Airline">
+        <option value="FO" label="Flybondi">
+        <option value="AZ" label="ITA Airways">
+        <option value="UX" label="Air Europa">
+        <option value="IB" label="Iberia">
+        <option value="AA" label="American Airlines">
+        <option value="DL" label="Delta">
+        <option value="UA" label="United">
+        <option value="B6" label="JetBlue">
+        <option value="AF" label="Air France">
+        <option value="KL" label="KLM">
+        <option value="BA" label="British Airways">
+        <option value="TP" label="TAP Portugal">
+        <option value="LH" label="Lufthansa">
+        <option value="AM" label="Aeroméxico">
+        <option value="CU" label="Cubana">
+        <option value="TK" label="Turkish Airlines">
+        <option value="EK" label="Emirates">
+        <option value="QR" label="Qatar Airways">
+    </datalist>
 
-<datalist id="airlineOptions">
-    <option value="AR" label="Aerolíneas Argentinas">
-    <option value="LA" label="LATAM Airlines">
-    <option value="JJ" label="LATAM Brasil">
-    <option value="G3" label="Gol">
-    <option value="AD" label="Azul">
-    <option value="CM" label="Copa Airlines">
-    <option value="AV" label="Avianca">
-    <option value="H2" label="Sky Airline">
-    <option value="FO" label="Flybondi">
-    <option value="AZ" label="ITA Airways">
-    <option value="UX" label="Air Europa">
-    <option value="IB" label="Iberia">
-    <option value="AA" label="American Airlines">
-    <option value="DL" label="Delta">
-    <option value="UA" label="United">
-    <option value="B6" label="JetBlue">
-    <option value="AF" label="Air France">
-    <option value="KL" label="KLM">
-    <option value="BA" label="British Airways">
-    <option value="TP" label="TAP Portugal">
-    <option value="LH" label="Lufthansa">
-    <option value="AM" label="Aeroméxico">
-    <option value="CU" label="Cubana">
-    <option value="TK" label="Turkish Airlines">
-    <option value="EK" label="Emirates">
-    <option value="QR" label="Qatar Airways">
-</datalist>
+    <datalist id="cityOptions">
+        <option value="MVD" label="Montevideo">
+        <option value="BUE" label="Buenos Aires (ciudad)">
+        <option value="USH" label="Ushuaia">
+        <option value="FTE" label="Punta del Este">
+        <option value="COR" label="Córdoba (AR)">
+        <option value="MDZ" label="Mendoza">
+        <option value="BRC" label="Bariloche">
+        <option value="IGR" label="Puerto Iguazú">
+        <option value="SAO" label="São Paulo (ciudad)">
+        <option value="RIO" label="Río de Janeiro (ciudad)">
+        <option value="POA" label="Porto Alegre">
+        <option value="FLN" label="Florianópolis">
+        <option value="ASU" label="Asunción">
+        <option value="SCL" label="Santiago de Chile">
+        <option value="LIM" label="Lima">
+        <option value="BOG" label="Bogotá">
+        <option value="PTY" label="Ciudad de Panamá">
+        <option value="UIO" label="Quito">
+        <option value="CCS" label="Caracas">
+        <option value="MIA" label="Miami">
+        <option value="NYC" label="Nueva York (ciudad)">
+        <option value="MEX" label="Ciudad de México">
+        <option value="MAD" label="Madrid">
+        <option value="BCN" label="Barcelona">
+        <option value="LON" label="Londres (ciudad)">
+        <option value="PAR" label="París (ciudad)">
+        <option value="ROM" label="Roma (ciudad)">
+        <option value="LIS" label="Lisboa">
+    </datalist>
 
-<datalist id="cityOptions">
-    <option value="MVD" label="Montevideo">
-    <option value="BUE" label="Buenos Aires (ciudad)">
-    <option value="USH" label="Ushuaia">
-    <option value="FTE" label="Punta del Este">
-    <option value="COR" label="Córdoba (AR)">
-    <option value="MDZ" label="Mendoza">
-    <option value="BRC" label="Bariloche">
-    <option value="IGR" label="Puerto Iguazú">
-    <option value="SAO" label="São Paulo (ciudad)">
-    <option value="RIO" label="Río de Janeiro (ciudad)">
-    <option value="POA" label="Porto Alegre">
-    <option value="FLN" label="Florianópolis">
-    <option value="ASU" label="Asunción">
-    <option value="SCL" label="Santiago de Chile">
-    <option value="LIM" label="Lima">
-    <option value="BOG" label="Bogotá">
-    <option value="PTY" label="Ciudad de Panamá">
-    <option value="UIO" label="Quito">
-    <option value="CCS" label="Caracas">
-    <option value="MIA" label="Miami">
-    <option value="NYC" label="Nueva York (ciudad)">
-    <option value="MEX" label="Ciudad de México">
-    <option value="MAD" label="Madrid">
-    <option value="BCN" label="Barcelona">
-    <option value="LON" label="Londres (ciudad)">
-    <option value="PAR" label="París (ciudad)">
-    <option value="ROM" label="Roma (ciudad)">
-    <option value="LIS" label="Lisboa">
-</datalist>
+    <script>
+        function blankStrips() {
+            return [
+                { city: '', airline: 'AR', mode: 'O', amount: '' }
+            ];
+        }
 
-<script>
-    function blankStrips() {
-        return [
-            { city: '', airline: 'AR', mode: 'O', amount: '' }
-        ];
-    }
+        let strips = blankStrips();
 
-    let strips = blankStrips();
+        const stripsEl = document.getElementById('strips');
+        const outputEl = document.getElementById('output');
+        const nucTotalEl = document.getElementById('nucTotal');
+        const statusEl = document.getElementById('status');
+        const statusTextEl = document.getElementById('statusText');
+        let currentFmt = 'tti';
 
-    const stripsEl = document.getElementById('strips');
-    const outputEl = document.getElementById('output');
-    const nucTotalEl = document.getElementById('nucTotal');
-    const statusEl = document.getElementById('status');
-    const statusTextEl = document.getElementById('statusText');
-    let currentFmt = 'tti';
-
-    function render() {
-        stripsEl.innerHTML = '';
-        strips.forEach((s, i) => {
-            const div = document.createElement('div');
-            div.className = 'strip' + (s.mode === 'X' ? ' is-connection' : (s.mode === 'S' ? ' is-stopover' : ''));
-            div.innerHTML = `
+        function render() {
+            stripsEl.innerHTML = '';
+            strips.forEach((s, i) => {
+                const div = document.createElement('div');
+                div.className = 'strip' + (s.mode === 'X' ? ' is-connection' : (s.mode === 'S' ? ' is-stopover' : ''));
+                div.innerHTML = `
       <div class="strip-top">
         <span class="num">Tramo ${i + 1}</span>
         <button class="remove-btn" data-idx="${i}" data-action="remove">✕</button>
@@ -852,228 +860,231 @@
         </div>
       </div>
     `;
-            stripsEl.appendChild(div);
-        });
-
-        stripsEl.querySelectorAll('input').forEach(inp => {
-            inp.addEventListener('input', e => {
-                const idx = +e.target.dataset.idx;
-                const field = e.target.dataset.field;
-                let val = e.target.value;
-                if (field === 'city' || field === 'airline') val = val.toUpperCase();
-                strips[idx][field] = val;
-                compute();
+                stripsEl.appendChild(div);
             });
-        });
 
-        stripsEl.querySelectorAll('[data-mode]').forEach(btn => {
-            btn.addEventListener('click', e => {
-                const idx = +e.target.dataset.idx;
-                strips[idx].mode = e.target.dataset.mode;
-                render();
-                compute();
+            stripsEl.querySelectorAll('input').forEach(inp => {
+                inp.addEventListener('input', e => {
+                    const idx = +e.target.dataset.idx;
+                    const field = e.target.dataset.field;
+                    let val = e.target.value;
+                    if (field === 'city' || field === 'airline') val = val.toUpperCase();
+                    strips[idx][field] = val;
+                    compute();
+                });
             });
-        });
 
-        stripsEl.querySelectorAll('[data-action="remove"]').forEach(btn => {
-            btn.addEventListener('click', e => {
-                const idx = +e.target.dataset.idx;
-                strips.splice(idx, 1);
-                render();
-                compute();
+            stripsEl.querySelectorAll('[data-mode]').forEach(btn => {
+                btn.addEventListener('click', e => {
+                    const idx = +e.target.dataset.idx;
+                    strips[idx].mode = e.target.dataset.mode;
+                    render();
+                    compute();
+                });
             });
-        });
-    }
 
-    function compute() {
-        const origin = (document.getElementById('origin').value || '').toUpperCase().trim();
-        const roe = document.getElementById('roe').value.trim() || '1.00';
+            stripsEl.querySelectorAll('[data-action="remove"]').forEach(btn => {
+                btn.addEventListener('click', e => {
+                    const idx = +e.target.dataset.idx;
+                    strips.splice(idx, 1);
+                    render();
+                    compute();
+                });
+            });
+        }
 
-        let nuc = 0;
-        let hasAmount = false;
-        strips.forEach(s => {
-            const amt = parseFloat(s.amount);
-            if (!isNaN(amt)) { nuc += amt; hasAmount = true; }
-        });
-        const nucStr = nuc.toFixed(2);
-        nucTotalEl.value = hasAmount ? nucStr : '';
+        function compute() {
+            const origin = (document.getElementById('origin').value || '').toUpperCase().trim();
+            const roe = document.getElementById('roe').value.trim() || '1.00';
 
-        // Build fare calc string
-        let parts = [];
-        parts.push(`<span class="city-tok">${origin || '???'}</span>`);
-        strips.forEach(s => {
-            const cityDisplay = s.mode === 'X'
-                ? `<span class="conn-tok">X/${s.city}</span>`
-                : `<span class="city-tok">${s.city}</span>`;
-            const amtDisplay = s.amount ? `<span class="amt-tok">${s.amount}</span>` : '';
-            parts.push(`<span class="air-tok">${s.airline}</span>`);
-            parts.push(cityDisplay + amtDisplay);
-        });
+            let nuc = 0;
+            let hasAmount = false;
+            strips.forEach(s => {
+                const amt = parseFloat(s.amount);
+                if (!isNaN(amt)) { nuc += amt; hasAmount = true; }
+            });
+            const nucStr = nuc.toFixed(2);
+            nucTotalEl.value = hasAmount ? nucStr : '';
 
-        const fareCalcHtml = parts.join(' ') +
-            `<span class="kw-tok">NUC</span><span class="amt-tok">${nucStr}</span><span class="kw-tok">END</span> <span class="kw-tok">ROE</span><span class="amt-tok">${roe}</span>`;
+            // Build fare calc string
+            let parts = [];
+            parts.push(`<span class="city-tok">${origin || '???'}</span>`);
+            strips.forEach(s => {
+                const cityDisplay = s.mode === 'X'
+                    ? `<span class="conn-tok">X/${s.city}</span>`
+                    : `<span class="city-tok">${s.city}</span>`;
+                const amtDisplay = s.amount ? `<span class="amt-tok">${s.amount}</span>` : '';
+                parts.push(`<span class="air-tok">${s.airline}</span>`);
+                parts.push(cityDisplay + amtDisplay);
+            });
 
-        const fareCalcPlain = origin + ' ' + strips.map(s => {
-            const city = s.mode === 'X' ? `X/${s.city}` : s.city;
-            return `${s.airline} ${city}${s.amount || ''}`;
-        }).join(' ') + `NUC${nucStr}END ROE${roe}`;
+            const fareCalcHtml = parts.join(' ') +
+                `<span class="kw-tok">NUC</span><span class="amt-tok">${nucStr}</span><span class="kw-tok">END</span> <span class="kw-tok">ROE</span><span class="amt-tok">${roe}</span>`;
 
-        if (currentFmt === 'tti') {
-            const ttiPlain = 'TTI/C' + origin + ' ' + strips.map(s => {
+            const fareCalcPlain = origin + ' ' + strips.map(s => {
                 const city = s.mode === 'X' ? `X/${s.city}` : s.city;
                 return `${s.airline} ${city}${s.amount || ''}`;
-            }).join(' ') + `NUC${nucStr}ENDROE${roe}`;
-            outputEl.innerHTML = `<span class="kw-tok">TTI/C</span>` + fareCalcHtml.replace(/^<span class="city-tok">/, `<span class="city-tok">`);
-            // Simplify: rebuild directly with TTI prefix
-            outputEl.innerHTML = `<span class="kw-tok">TTI/C</span>` + parts.join(' ') +
-                `<span class="kw-tok">NUC</span><span class="amt-tok">${nucStr}</span><span class="kw-tok">END</span><span class="kw-tok">ROE</span><span class="amt-tok">${roe}</span>`;
-            window.__fareCalcCopyValue = ttiPlain;
-        } else {
-            outputEl.innerHTML = fareCalcHtml;
-            window.__fareCalcCopyValue = fareCalcPlain;
-        }
+            }).join(' ') + `NUC${nucStr}END ROE${roe}`;
 
-        // Validation
-        const partialSum = strips.reduce((acc, s) => {
-            const a = parseFloat(s.amount);
-            return acc + (isNaN(a) ? 0 : a);
-        }, 0);
-
-        const amountsEntered = strips.filter(s => s.amount).length;
-        const citiesFilled = strips.every(s => s.city && s.city.length === 3) && origin.length === 3;
-
-        if (!citiesFilled) {
-            statusEl.className = 'status warn';
-            statusTextEl.textContent = 'Faltan códigos de ciudad de 3 letras';
-        } else if (amountsEntered === 0) {
-            statusEl.className = 'status warn';
-            statusTextEl.textContent = 'Ingresá al menos un monto parcial';
-        } else {
-            statusEl.className = 'status ok';
-            statusTextEl.textContent = `Línea lista · NUC ${nucStr} · ROE ${roe}`;
-        }
-    }
-
-    const AIRPORT_TO_CITY = {
-        AEP: 'BUE', EZE: 'BUE',
-        JFK: 'NYC', EWR: 'NYC', LGA: 'NYC',
-        ORD: 'CHI', MDW: 'CHI',
-        LHR: 'LON', LGW: 'LON', LCY: 'LON', STN: 'LON', LTN: 'LON',
-        CDG: 'PAR', ORY: 'PAR',
-        GRU: 'SAO', CGH: 'SAO', VCP: 'SAO',
-        GIG: 'RIO', SDU: 'RIO',
-        MIA: 'MIA', FLL: 'MIA',
-        DFW: 'DFW', DAL: 'DFW'
-    };
-
-    function parseTQT(text) {
-        const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
-        const rowRe = /^(?:\d+\s*)?([XO])?\s*([A-Z]{3})\s+([A-Z]{2})\s+\d/;
-        const soloCityRe = /^([A-Z]{3})$/;
-        const rows = [];
-        for (const line of lines) {
-            const m = line.match(rowRe);
-            if (m) {
-                rows.push({ flag: m[1] || '', city: m[2], airline: m[3] });
-                continue;
+            if (currentFmt === 'tti') {
+                const ttiPlain = 'TTI/C' + origin + ' ' + strips.map(s => {
+                    const city = s.mode === 'X' ? `X/${s.city}` : s.city;
+                    return `${s.airline} ${city}${s.amount || ''}`;
+                }).join(' ') + `NUC${nucStr}ENDROE${roe}`;
+                outputEl.innerHTML = `<span class="kw-tok">TTI/C</span>` + fareCalcHtml.replace(/^<span class="city-tok">/, `<span class="city-tok">`);
+                // Simplify: rebuild directly with TTI prefix
+                outputEl.innerHTML = `<span class="kw-tok">TTI/C</span>` + parts.join(' ') +
+                    `<span class="kw-tok">NUC</span><span class="amt-tok">${nucStr}</span><span class="kw-tok">END</span><span class="kw-tok">ROE</span><span class="amt-tok">${roe}</span>`;
+                window.__fareCalcCopyValue = ttiPlain;
+            } else {
+                outputEl.innerHTML = fareCalcHtml;
+                window.__fareCalcCopyValue = fareCalcPlain;
             }
-            const m2 = line.match(soloCityRe);
-            if (m2) {
-                rows.push({ flag: '', city: m2[1], airline: '', terminalOnly: true });
+
+            // Validation
+            const partialSum = strips.reduce((acc, s) => {
+                const a = parseFloat(s.amount);
+                return acc + (isNaN(a) ? 0 : a);
+            }, 0);
+
+            const amountsEntered = strips.filter(s => s.amount).length;
+            const citiesFilled = strips.every(s => s.city && s.city.length === 3) && origin.length === 3;
+
+            if (!citiesFilled) {
+                statusEl.className = 'status warn';
+                statusTextEl.textContent = 'Faltan códigos de ciudad de 3 letras';
+            } else if (amountsEntered === 0) {
+                statusEl.className = 'status warn';
+                statusTextEl.textContent = 'Ingresá al menos un monto parcial';
+            } else {
+                statusEl.className = 'status ok';
+                statusTextEl.textContent = `Línea lista · NUC ${nucStr} · ROE ${roe}`;
             }
         }
-        return rows;
-    }
 
-    function applyParsedTQT(rows, normalize) {
-        if (rows.length < 2) return false;
+        const AIRPORT_TO_CITY = {
+            AEP: 'BUE', EZE: 'BUE',
+            JFK: 'NYC', EWR: 'NYC', LGA: 'NYC',
+            ORD: 'CHI', MDW: 'CHI',
+            LHR: 'LON', LGW: 'LON', LCY: 'LON', STN: 'LON', LTN: 'LON',
+            CDG: 'PAR', ORY: 'PAR',
+            GRU: 'SAO', CGH: 'SAO', VCP: 'SAO',
+            GIG: 'RIO', SDU: 'RIO',
+            MIA: 'MIA', FLL: 'MIA',
+            DFW: 'DFW', DAL: 'DFW'
+        };
 
-        const mapCity = (code) => normalize && AIRPORT_TO_CITY[code] ? AIRPORT_TO_CITY[code] : code;
-
-        document.getElementById('origin').value = mapCity(rows[0].city);
-        let lastAirline = rows[0].airline || 'AR';
-
-        const newStrips = [];
-        for (let i = 1; i < rows.length; i++) {
-            const r = rows[i];
-            const airline = r.airline || lastAirline;
-            lastAirline = airline;
-            const mode = r.flag === 'X' ? 'X' : 'O';
-            newStrips.push({ city: mapCity(r.city), airline, mode, amount: '' });
+        function parseTQT(text) {
+            const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+            const rowRe = /^(?:\d+\s*)?([XO])?\s*([A-Z]{3})\s+([A-Z]{2})\s+\d/;
+            const soloCityRe = /^([A-Z]{3})$/;
+            const rows = [];
+            for (const line of lines) {
+                const m = line.match(rowRe);
+                if (m) {
+                    rows.push({ flag: m[1] || '', city: m[2], airline: m[3] });
+                    continue;
+                }
+                const m2 = line.match(soloCityRe);
+                if (m2) {
+                    rows.push({ flag: '', city: m2[1], airline: '', terminalOnly: true });
+                }
+            }
+            return rows;
         }
-        strips = newStrips;
-        return true;
-    }
 
-    document.getElementById('togglePaste').addEventListener('click', (e) => {
-        const body = document.getElementById('pasteBody');
-        const isHidden = body.style.display === 'none';
-        body.style.display = isHidden ? 'flex' : 'none';
-        e.target.textContent = isHidden ? 'ocultar' : 'mostrar';
-    });
+        function applyParsedTQT(rows, normalize) {
+            if (rows.length < 2) return false;
 
-    document.getElementById('parseTqtBtn').addEventListener('click', () => {
-        const text = document.getElementById('tqtInput').value;
-        const normalize = document.getElementById('normalizeAirports').checked;
-        const msg = document.getElementById('parseMsg');
+            const mapCity = (code) => normalize && AIRPORT_TO_CITY[code] ? AIRPORT_TO_CITY[code] : code;
 
-        const rows = parseTQT(text);
-        const ok = applyParsedTQT(rows, normalize);
+            document.getElementById('origin').value = mapCity(rows[0].city);
+            let lastAirline = rows[0].airline || 'AR';
 
-        if (ok) {
+            const newStrips = [];
+            for (let i = 1; i < rows.length; i++) {
+                const r = rows[i];
+                const airline = r.airline || lastAirline;
+                lastAirline = airline;
+                const mode = r.flag === 'X' ? 'X' : 'O';
+                newStrips.push({ city: mapCity(r.city), airline, mode, amount: '' });
+            }
+            strips = newStrips;
+            return true;
+        }
+
+        document.getElementById('togglePaste').addEventListener('click', (e) => {
+            const body = document.getElementById('pasteBody');
+            const isHidden = body.style.display === 'none';
+            body.style.display = isHidden ? 'flex' : 'none';
+            e.target.textContent = isHidden ? 'ocultar' : 'mostrar';
+        });
+
+        document.getElementById('parseTqtBtn').addEventListener('click', () => {
+            const text = document.getElementById('tqtInput').value;
+            const normalize = document.getElementById('normalizeAirports').checked;
+            const msg = document.getElementById('parseMsg');
+
+            const rows = parseTQT(text);
+            const ok = applyParsedTQT(rows, normalize);
+
+            if (ok) {
+                render();
+                compute();
+                msg.className = 'parse-msg ok';
+                msg.textContent = `✓ ${rows.length} puntos detectados. Ahora completá los montos parciales en los tramos que correspondan.`;
+            } else {
+                msg.className = 'parse-msg err';
+                msg.textContent = '✕ No pude reconocer líneas de itinerario. Revisá el formato y probá de nuevo.';
+            }
+        });
+
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            strips = blankStrips();
+            document.getElementById('origin').value = '';
+            document.getElementById('roe').value = '1.00';
+            document.getElementById('tqtInput').value = '';
+            document.getElementById('parseMsg').textContent = '';
             render();
             compute();
-            msg.className = 'parse-msg ok';
-            msg.textContent = `✓ ${rows.length} puntos detectados. Ahora completá los montos parciales en los tramos que correspondan.`;
-        } else {
-            msg.className = 'parse-msg err';
-            msg.textContent = '✕ No pude reconocer líneas de itinerario. Revisá el formato y probá de nuevo.';
-        }
-    });
+        });
 
-    document.getElementById('clearBtn').addEventListener('click', () => {
-        strips = blankStrips();
-        document.getElementById('origin').value = '';
-        document.getElementById('roe').value = '1.00';
-        document.getElementById('tqtInput').value = '';
-        document.getElementById('parseMsg').textContent = '';
-        render();
-        compute();
-    });
-
-    document.getElementById('addStrip').addEventListener('click', () => {
-        strips.push({ city: '', airline: 'AR', mode: 'O', amount: '' });
-        render();
-        compute();
-    });
-
-    document.getElementById('origin').addEventListener('input', compute);
-    document.getElementById('roe').addEventListener('input', compute);
-
-    document.querySelectorAll('.format-toggle button').forEach(btn => {
-        btn.addEventListener('click', e => {
-            document.querySelectorAll('.format-toggle button').forEach(b => b.classList.remove('active'));
-            e.target.classList.add('active');
-            currentFmt = e.target.dataset.fmt;
+        document.getElementById('addStrip').addEventListener('click', () => {
+            strips.push({ city: '', airline: 'AR', mode: 'O', amount: '' });
+            render();
             compute();
         });
-    });
 
-    document.getElementById('copyBtn').addEventListener('click', () => {
-        const val = window.__fareCalcCopyValue || '';
-        if (!val) return;
-        const ta = document.createElement('textarea');
-        ta.value = val;
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand('copy'); } catch (e) { }
-        document.body.removeChild(ta);
+        document.getElementById('origin').addEventListener('input', compute);
+        document.getElementById('roe').addEventListener('input', compute);
 
-        const toast = document.getElementById('toast');
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 1600);
-    });
+        document.querySelectorAll('.format-toggle button').forEach(btn => {
+            btn.addEventListener('click', e => {
+                document.querySelectorAll('.format-toggle button').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentFmt = e.target.dataset.fmt;
+                compute();
+            });
+        });
 
-    render();
-    compute();
-</script>
+        document.getElementById('copyBtn').addEventListener('click', () => {
+            const val = window.__fareCalcCopyValue || '';
+            if (!val) return;
+            const ta = document.createElement('textarea');
+            ta.value = val;
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); } catch (e) { }
+            document.body.removeChild(ta);
+
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 1600);
+        });
+
+        render();
+        compute();
+    </script>
+
+</body>
+</html>
